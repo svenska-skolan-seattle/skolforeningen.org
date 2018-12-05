@@ -155,14 +155,6 @@ function svenskaskolaniseattle_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Site Info', 'svenskaskolaniseattle' ),
-			'id'            => 'site-info',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'svenskaskolaniseattle' )
-		)
-	);
 }
 add_action( 'widgets_init', 'svenskaskolaniseattle_widgets_init' );
 

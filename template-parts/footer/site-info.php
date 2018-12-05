@@ -10,13 +10,7 @@
 
 ?>
 <div class="site-info">
-	<?php
-		if ( is_active_sidebar( 'site-info' ) ) {
-	?>
-		<div class="site-info-content">
-			<?php dynamic_sidebar( 'site-info' ); ?>
-		</div>
-	<?php
-		}
-	?>
+	<div class="site-info-content">
+		<p>Copyright &copy; 2018 Svenska Skolföreningen i Seattle</p>
+	</div>
 </div>
