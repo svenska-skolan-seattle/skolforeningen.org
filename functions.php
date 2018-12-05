@@ -10,24 +10,16 @@
  */
 
 /**
- * Twenty Seventeen only works in WordPress 4.7 or later.
- */
-if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
-	return;
-}
-
-/**
  * Sets up theme defaults and registers support for various WordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function twentyseventeen_setup() {
+function svenskaskolaniseattle_setup() {
 	/*
 	 * Make theme available for translation.
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentyseventeen
+	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/svenskaskolaniseattle
 	 * If you're building a theme based on Twenty Seventeen, use a find and replace
 	 * to change 'svenskaskolaniseattle' to the name of your theme in all the template files.
 	 */
@@ -51,9 +43,9 @@ function twentyseventeen_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	add_image_size( 'twentyseventeen-featured-image', 2000, 1200, true );
+	add_image_size( 'svenskaskolaniseattle-featured-image', 2000, 1200, true );
 
-	add_image_size( 'twentyseventeen-thumbnail-avatar', 100, 100, true );
+	add_image_size( 'svenskaskolaniseattle-thumbnail-avatar', 100, 100, true );
 
 	// Set the default content width.
 	$GLOBALS['content_width'] = 525;
@@ -112,7 +104,7 @@ function twentyseventeen_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
 	  */
-	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
+	// add_editor_style( array( 'assets/css/editor-style.css', svenskaskolaniseattle_fonts_url() ) );
 
 	// Define and register starter content to showcase the theme on new sites.
 	$starter_content = array(
@@ -133,39 +125,6 @@ function twentyseventeen_setup() {
 			'sidebar-3' => array(
 				'text_about',
 				'search',
-			),
-		),
-
-		// Specify the core-defined pages to create and add custom thumbnails to some of them.
-		'posts'       => array(
-			'home',
-			'about'            => array(
-				'thumbnail' => '{{image-sandwich}}',
-			),
-			'contact'          => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-			'blog'             => array(
-				'thumbnail' => '{{image-coffee}}',
-			),
-			'homepage-section' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-		),
-
-		// Create the custom image attachments used as post thumbnails for pages.
-		'attachments' => array(
-			'image-espresso' => array(
-				'post_title' => _x( 'Espresso', 'Theme starter content', 'svenskaskolaniseattle' ),
-				'file'       => 'assets/images/espresso.jpg', // URL relative to the template directory.
-			),
-			'image-sandwich' => array(
-				'post_title' => _x( 'Sandwich', 'Theme starter content', 'svenskaskolaniseattle' ),
-				'file'       => 'assets/images/sandwich.jpg',
-			),
-			'image-coffee'   => array(
-				'post_title' => _x( 'Coffee', 'Theme starter content', 'svenskaskolaniseattle' ),
-				'file'       => 'assets/images/coffee.jpg',
 			),
 		),
 
@@ -211,18 +170,8 @@ function twentyseventeen_setup() {
 		),
 	);
 
-	/**
-	 * Filters Twenty Seventeen array of starter content.
-	 *
-	 * @since Twenty Seventeen 1.1
-	 *
-	 * @param array $starter_content Array of starter content.
-	 */
-	$starter_content = apply_filters( 'twentyseventeen_starter_content', $starter_content );
-
-	add_theme_support( 'starter-content', $starter_content );
 }
-add_action( 'after_setup_theme', 'twentyseventeen_setup' );
+add_action( 'after_setup_theme', 'svenskaskolaniseattle_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -231,7 +180,7 @@ add_action( 'after_setup_theme', 'twentyseventeen_setup' );
  *
  * @global int $content_width
  */
-function twentyseventeen_content_width() {
+function svenskaskolaniseattle_content_width() {
 
 	$content_width = $GLOBALS['content_width'];
 
@@ -240,7 +189,7 @@ function twentyseventeen_content_width() {
 
 	// Check if layout is one column.
 	if ( 'one-column' === $page_layout ) {
-		if ( twentyseventeen_is_frontpage() ) {
+		if ( svenskaskolaniseattle_is_frontpage() ) {
 			$content_width = 644;
 		} elseif ( is_page() ) {
 			$content_width = 740;
@@ -259,66 +208,16 @@ function twentyseventeen_content_width() {
 	 *
 	 * @param int $content_width Content width in pixels.
 	 */
-	$GLOBALS['content_width'] = apply_filters( 'twentyseventeen_content_width', $content_width );
+	$GLOBALS['content_width'] = apply_filters( 'svenskaskolaniseattle_content_width', $content_width );
 }
-add_action( 'template_redirect', 'twentyseventeen_content_width', 0 );
-
-/**
- * Register custom fonts.
- */
-function twentyseventeen_fonts_url() {
-	$fonts_url = '';
-
-	/*
-	 * Translators: If there are characters in your language that are not
-	 * supported by Libre Franklin, translate this to 'off'. Do not translate
-	 * into your own language.
-	 */
-	$libre_franklin = _x( 'on', 'Libre Franklin font: on or off', 'svenskaskolaniseattle' );
-
-	if ( 'off' !== $libre_franklin ) {
-		$font_families = array();
-
-		$font_families[] = 'Libre Franklin:300,300i,400,400i,600,600i,800,800i';
-
-		$query_args = array(
-			'family' => urlencode( implode( '|', $font_families ) ),
-			'subset' => urlencode( 'latin,latin-ext' ),
-		);
-
-		$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
-	}
-
-	return esc_url_raw( $fonts_url );
-}
-
-/**
- * Add preconnect for Google Fonts.
- *
- * @since Twenty Seventeen 1.0
- *
- * @param array  $urls           URLs to print for resource hints.
- * @param string $relation_type  The relation type the URLs are printed.
- * @return array $urls           URLs to print for resource hints.
- */
-function twentyseventeen_resource_hints( $urls, $relation_type ) {
-	if ( wp_style_is( 'twentyseventeen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
-		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
-			'crossorigin',
-		);
-	}
-
-	return $urls;
-}
-add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
+add_action( 'template_redirect', 'svenskaskolaniseattle_content_width', 0 );
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function twentyseventeen_widgets_init() {
+function svenskaskolaniseattle_widgets_init() {
 	register_sidebar(
 		array(
 			'name'          => __( 'Blog Sidebar', 'svenskaskolaniseattle' ),
@@ -355,7 +254,7 @@ function twentyseventeen_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
+add_action( 'widgets_init', 'svenskaskolaniseattle_widgets_init' );
 
 /**
  * Replaces "[...]" (appended to automatically generated excerpts) with ... and
@@ -366,7 +265,7 @@ add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
  * @param string $link Link to single post/page.
  * @return string 'Continue reading' link prepended with an ellipsis.
  */
-function twentyseventeen_excerpt_more( $link ) {
+function svenskaskolaniseattle_excerpt_more( $link ) {
 	if ( is_admin() ) {
 		return $link;
 	}
@@ -379,7 +278,7 @@ function twentyseventeen_excerpt_more( $link ) {
 	);
 	return ' &hellip; ' . $link;
 }
-add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
+add_filter( 'excerpt_more', 'svenskaskolaniseattle_excerpt_more' );
 
 /**
  * Handles JavaScript detection.
@@ -388,102 +287,81 @@ add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
  *
  * @since Twenty Seventeen 1.0
  */
-function twentyseventeen_javascript_detection() {
+function svenskaskolaniseattle_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
-add_action( 'wp_head', 'twentyseventeen_javascript_detection', 0 );
+add_action( 'wp_head', 'svenskaskolaniseattle_javascript_detection', 0 );
 
 /**
  * Add a pingback url auto-discovery header for singularly identifiable articles.
  */
-function twentyseventeen_pingback_header() {
+function svenskaskolaniseattle_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
 	}
 }
-add_action( 'wp_head', 'twentyseventeen_pingback_header' );
+add_action( 'wp_head', 'svenskaskolaniseattle_pingback_header' );
 
-/**
- * Display custom color CSS.
- */
-function twentyseventeen_colors_css_wrap() {
-	if ( 'custom' !== get_theme_mod( 'colorscheme' ) && ! is_customize_preview() ) {
-		return;
-	}
-
-	require_once( get_parent_theme_file_path( '/inc/color-patterns.php' ) );
-	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
-
-	$customize_preview_data_hue = '';
-	if ( is_customize_preview() ) {
-		$customize_preview_data_hue = 'data-hue="' . $hue . '"';
-	}
-?>
-	<style type="text/css" id="custom-theme-colors" <?php echo $customize_preview_data_hue; ?>>
-		<?php echo twentyseventeen_custom_colors_css(); ?>
-	</style>
-<?php
-}
-add_action( 'wp_head', 'twentyseventeen_colors_css_wrap' );
+// add_action( 'wp_head', 'svenskaskolaniseattlen_colors_css_wrap' );
 
 /**
  * Enqueue scripts and styles.
  */
-function twentyseventeen_scripts() {
+function svenskaskolaniseattle_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentyseventeen-fonts', twentyseventeen_fonts_url(), array(), null );
+	// wp_enqueue_style( 'svenskaskolaniseattle-fonts', svenskaskolaniseattle_fonts_url(), array(), null );
 
 	// Theme stylesheet.
-	wp_enqueue_style( 'twentyseventeen-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'svenskaskolaniseattle-style', get_stylesheet_uri() );
 
 	// Load the dark colorscheme.
-	if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
-		wp_enqueue_style( 'twentyseventeen-colors-dark', get_theme_file_uri( '/assets/css/colors-dark.css' ), array( 'twentyseventeen-style' ), '1.0' );
-	}
+	// if ( 'dark' === get_theme_mod( 'colorscheme', 'light' ) || is_customize_preview() ) {
+	// 	wp_enqueue_style( 'svenskaskolaniseattle-colors-dark', get_theme_file_uri( '/assets/css/colors-dark.css' ), array( 'svenskaskolaniseattle-style' ), '1.0' );
+	// }
 
 	// Load the Internet Explorer 9 specific stylesheet, to fix display issues in the Customizer.
-	if ( is_customize_preview() ) {
-		wp_enqueue_style( 'twentyseventeen-ie9', get_theme_file_uri( '/assets/css/ie9.css' ), array( 'twentyseventeen-style' ), '1.0' );
-		wp_style_add_data( 'twentyseventeen-ie9', 'conditional', 'IE 9' );
-	}
+	// if ( is_customize_preview() ) {
+	// 	wp_enqueue_style( 'svenskaskolaniseattle-ie9', get_theme_file_uri( '/assets/css/ie9.css' ), array( 'svenskaskolaniseattle-style' ), '1.0' );
+	// 	wp_style_add_data( 'svenskaskolaniseattle-ie9', 'conditional', 'IE 9' );
+	// }
 
-	// Load the Internet Explorer 8 specific stylesheet.
-	wp_enqueue_style( 'twentyseventeen-ie8', get_theme_file_uri( '/assets/css/ie8.css' ), array( 'twentyseventeen-style' ), '1.0' );
-	wp_style_add_data( 'twentyseventeen-ie8', 'conditional', 'lt IE 9' );
+	// // Load the Internet Explorer 8 specific stylesheet.
+	// wp_enqueue_style( 'svenskaskolaniseattle-ie8', get_theme_file_uri( '/assets/css/ie8.css' ), array( 'svenskaskolaniseattle-style' ), '1.0' );
+	// wp_style_add_data( 'svenskaskolaniseattle-ie8', 'conditional', 'lt IE 9' );
 
-	// Load the html5 shiv.
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
-	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
+	// // Load the html5 shiv.
+	// wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
+	// wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
-	wp_enqueue_script( 'twentyseventeen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
+	// wp_enqueue_script( 'svenskaskolaniseattle-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 
-	$twentyseventeen_l10n = array(
-		'quote' => twentyseventeen_get_svg( array( 'icon' => 'quote-right' ) ),
-	);
+	// $svenskaskolaniseattle_l10n = array(
+	// 	'quote' => svenskaskolaniseattle_get_svg( array( 'icon' => 'quote-right' ) ),
+	// );
 
-	if ( has_nav_menu( 'top' ) ) {
-		wp_enqueue_script( 'twentyseventeen-navigation', get_theme_file_uri( '/assets/js/navigation.js' ), array( 'jquery' ), '1.0', true );
-		$twentyseventeen_l10n['expand']   = __( 'Expand child menu', 'svenskaskolaniseattle' );
-		$twentyseventeen_l10n['collapse'] = __( 'Collapse child menu', 'svenskaskolaniseattle' );
-		$twentyseventeen_l10n['icon']     = twentyseventeen_get_svg(
-			array(
-				'icon'     => 'angle-down',
-				'fallback' => true,
-			)
-		);
-	}
+	// if ( has_nav_menu( 'top' ) ) {
+	// 	wp_enqueue_script( 'svenskaskolaniseattle-navigation', get_theme_file_uri( '/assets/js/navigation.js' ), array( 'jquery' ), '1.0', true );
+	// 	$svenskaskolaniseattle_l10n['expand']   = __( 'Expand child menu', 'svenskaskolaniseattle' );
+	// 	$svenskaskolaniseattle_l10n['collapse'] = __( 'Collapse child menu', 'svenskaskolaniseattle' );
+	// 	$svenskaskolaniseattle_l10n['icon']     = svenskaskolaniseattle_get_svg(
+	// 		array(
+	// 			'icon'     => 'angle-down',
+	// 			'fallback' => true,
+	// 		)
+	// 	);
+	// }
 
-	wp_enqueue_script( 'twentyseventeen-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
+	// wp_enqueue_script( 'svenskaskolaniseattle-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
 
-	wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
+	// wp_enqueue_script( 'jquery-scrollto', get_theme_file_uri( '/assets/js/jquery.scrollTo.js' ), array( 'jquery' ), '2.1.2', true );
 
-	wp_localize_script( 'twentyseventeen-skip-link-focus-fix', 'twentyseventeenScreenReaderText', $twentyseventeen_l10n );
+	// wp_localize_script( 'svenskaskolaniseattle-skip-link-focus-fix', 'svenskaskolaniseattleScreenReaderText', $svenskaskolaniseattle_l10n );
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
+	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+	// 	wp_enqueue_script( 'comment-reply' );
+	// }
 }
-add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
+add_action( 'wp_enqueue_scripts', 'svenskaskolaniseattle_scripts' );
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
@@ -496,7 +374,7 @@ add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
  *                      values in pixels (in that order).
  * @return string A source size value for use in a content image 'sizes' attribute.
  */
-function twentyseventeen_content_image_sizes_attr( $sizes, $size ) {
+function svenskaskolaniseattle_content_image_sizes_attr( $sizes, $size ) {
 	$width = $size[0];
 
 	if ( 740 <= $width ) {
@@ -511,7 +389,7 @@ function twentyseventeen_content_image_sizes_attr( $sizes, $size ) {
 
 	return $sizes;
 }
-add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_attr', 10, 2 );
+add_filter( 'wp_calculate_image_sizes', 'svenskaskolaniseattle_content_image_sizes_attr', 10, 2 );
 
 /**
  * Filter the `sizes` value in the header image markup.
@@ -523,13 +401,13 @@ add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_att
  * @param array  $attr   Array of the attributes for the image tag.
  * @return string The filtered header image HTML.
  */
-function twentyseventeen_header_image_tag( $html, $header, $attr ) {
+function svenskaskolaniseattle_header_image_tag( $html, $header, $attr ) {
 	if ( isset( $attr['sizes'] ) ) {
 		$html = str_replace( $attr['sizes'], '100vw', $html );
 	}
 	return $html;
 }
-add_filter( 'get_header_image_tag', 'twentyseventeen_header_image_tag', 10, 3 );
+add_filter( 'get_header_image_tag', 'svenskaskolaniseattle_header_image_tag', 10, 3 );
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
@@ -542,7 +420,7 @@ add_filter( 'get_header_image_tag', 'twentyseventeen_header_image_tag', 10, 3 );
  * @param array $size       Registered image size or flat array of height and width dimensions.
  * @return array The filtered attributes for the image markup.
  */
-function twentyseventeen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
+function svenskaskolaniseattle_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 	if ( is_archive() || is_search() || is_home() ) {
 		$attr['sizes'] = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
 	} else {
@@ -551,7 +429,7 @@ function twentyseventeen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) 
 
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnail_sizes_attr', 10, 3 );
+add_filter( 'wp_get_attachment_image_attributes', 'svenskaskolaniseattle_post_thumbnail_sizes_attr', 10, 3 );
 
 /**
  * Use front-page.php when Front page displays is set to a static page.
@@ -562,29 +440,10 @@ add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnai
  *
  * @return string The template to be used: blank if is_home() is true (defaults to index.php), else $template.
  */
-function twentyseventeen_front_page_template( $template ) {
+function svenskaskolaniseattle_front_page_template( $template ) {
 	return is_home() ? '' : $template;
 }
-add_filter( 'frontpage_template', 'twentyseventeen_front_page_template' );
-
-/**
- * Modifies tag cloud widget arguments to display all tags in the same font size
- * and use list format for better accessibility.
- *
- * @since Twenty Seventeen 1.4
- *
- * @param array $args Arguments for tag cloud widget.
- * @return array The filtered arguments for tag cloud widget.
- */
-function twentyseventeen_widget_tag_cloud_args( $args ) {
-	$args['largest']  = 1;
-	$args['smallest'] = 1;
-	$args['unit']     = 'em';
-	$args['format']   = 'list';
-
-	return $args;
-}
-add_filter( 'widget_tag_cloud_args', 'twentyseventeen_widget_tag_cloud_args' );
+add_filter( 'frontpage_template', 'svenskaskolaniseattle_front_page_template' );
 
 /**
  * Implement the Custom Header feature.
@@ -605,8 +464,3 @@ require get_parent_theme_file_path( '/inc/template-functions.php' );
  * Customizer additions.
  */
 require get_parent_theme_file_path( '/inc/customizer.php' );
-
-/**
- * SVG icons functions and filters.
- */
-require get_parent_theme_file_path( '/inc/icon-functions.php' );

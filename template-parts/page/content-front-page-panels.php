@@ -8,15 +8,15 @@
  * @version 1.0
  */
 
-global $twentyseventeencounter;
+global $svenskaskolaniseattlecounter;
 
 ?>
 
-<article id="panel<?php echo $twentyseventeencounter; ?>" <?php post_class( 'twentyseventeen-panel ' ); ?> >
+<article id="panel<?php echo $svenskaskolaniseattlecounter; ?>" <?php post_class( 'svenskaskolaniseattle-panel ' ); ?> >
 
 	<?php
 	if ( has_post_thumbnail() ) :
-		$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'twentyseventeen-featured-image' );
+		$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'svenskaskolaniseattle-featured-image' );
 
 		// Calculate aspect ratio: h / w * 100%.
 		$ratio = $thumbnail[2] / $thumbnail[1] * 100;
@@ -33,7 +33,7 @@ global $twentyseventeencounter;
 			<header class="entry-header">
 				<?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
 
-				<?php twentyseventeen_edit_link( get_the_ID() ); ?>
+				<?php svenskaskolaniseattle_edit_link( get_the_ID() ); ?>
 
 			</header><!-- .entry-header -->
 

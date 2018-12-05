@@ -30,8 +30,8 @@ get_header(); ?>
 
 				the_post_navigation(
 					array(
-						'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'svenskaskolaniseattle' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'svenskaskolaniseattle' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '</span>%title</span>',
-						'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'svenskaskolaniseattle' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'svenskaskolaniseattle' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></span>',
+						'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'svenskaskolaniseattle' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'svenskaskolaniseattle' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper">' . '&lt;' . '</span>%title</span>',
+						'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'svenskaskolaniseattle' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'svenskaskolaniseattle' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' . '&gt;' . '</span></span>',
 					)
 				);
 

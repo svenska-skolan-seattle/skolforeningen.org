@@ -42,8 +42,8 @@ get_header(); ?>
 
 			the_posts_pagination(
 				array(
-					'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'svenskaskolaniseattle' ) . '</span>',
-					'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'svenskaskolaniseattle' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
+					'prev_text'          => '&lt;' . '<span class="screen-reader-text">' . __( 'Previous page', 'svenskaskolaniseattle' ) . '</span>',
+					'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'svenskaskolaniseattle' ) . '</span>' . '&gt;'),
 					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'svenskaskolaniseattle' ) . ' </span>',
 				)
 			);
