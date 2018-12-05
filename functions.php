@@ -53,8 +53,7 @@ function svenskaskolaniseattle_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus(
 		array(
-			'top'    => __( 'Top Menu', 'svenskaskolaniseattle' ),
-			'social' => __( 'Social Links Menu', 'svenskaskolaniseattle' ),
+			'top'    => __( 'Top Menu', 'svenskaskolaniseattle' )
 		)
 	);
 
@@ -80,11 +79,9 @@ function svenskaskolaniseattle_setup() {
 		'post-formats', array(
 			'aside',
 			'image',
-			'video',
 			'quote',
 			'link',
 			'gallery',
-			'audio',
 		)
 	);
 
@@ -99,77 +96,6 @@ function svenskaskolaniseattle_setup() {
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, and column width.
-	  */
-	// add_editor_style( array( 'assets/css/editor-style.css', svenskaskolaniseattle_fonts_url() ) );
-
-	// Define and register starter content to showcase the theme on new sites.
-	$starter_content = array(
-		'widgets'     => array(
-			// Place three core-defined widgets in the sidebar area.
-			'sidebar-1' => array(
-				'text_business_info',
-				'search',
-				'text_about',
-			),
-
-			// Add the core-defined business info widget to the footer 1 area.
-			'sidebar-2' => array(
-				'text_business_info',
-			),
-
-			// Put two core-defined widgets in the footer 2 area.
-			'sidebar-3' => array(
-				'text_about',
-				'search',
-			),
-		),
-
-		// Default to a static front page and assign the front and posts pages.
-		'options'     => array(
-			'show_on_front'  => 'page',
-			'page_on_front'  => '{{home}}',
-			'page_for_posts' => '{{blog}}',
-		),
-
-		// Set the front page section theme mods to the IDs of the core-registered pages.
-		'theme_mods'  => array(
-			'panel_1' => '{{homepage-section}}',
-			'panel_2' => '{{about}}',
-			'panel_3' => '{{blog}}',
-			'panel_4' => '{{contact}}',
-		),
-
-		// Set up nav menus for each of the two areas registered in the theme.
-		'nav_menus'   => array(
-			// Assign a menu to the "top" location.
-			'top'    => array(
-				'name'  => __( 'Top Menu', 'svenskaskolaniseattle' ),
-				'items' => array(
-					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
-					'page_about',
-					'page_blog',
-					'page_contact',
-				),
-			),
-
-			// Assign a menu to the "social" location.
-			'social' => array(
-				'name'  => __( 'Social Links Menu', 'svenskaskolaniseattle' ),
-				'items' => array(
-					'link_yelp',
-					'link_facebook',
-					'link_twitter',
-					'link_instagram',
-					'link_email',
-				),
-			),
-		),
-	);
-
 }
 add_action( 'after_setup_theme', 'svenskaskolaniseattle_setup' );
 
@@ -220,9 +146,9 @@ add_action( 'template_redirect', 'svenskaskolaniseattle_content_width', 0 );
 function svenskaskolaniseattle_widgets_init() {
 	register_sidebar(
 		array(
-			'name'          => __( 'Blog Sidebar', 'svenskaskolaniseattle' ),
+			'name'          => __( 'Sidebar', 'svenskaskolaniseattle' ),
 			'id'            => 'sidebar-1',
-			'description'   => __( 'Add widgets here to appear in your sidebar on blog posts and archive pages.', 'svenskaskolaniseattle' ),
+			'description'   => __( 'Add widgets here to appear in your sidebar.', 'svenskaskolaniseattle' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -232,20 +158,8 @@ function svenskaskolaniseattle_widgets_init() {
 
 	register_sidebar(
 		array(
-			'name'          => __( 'Footer 1', 'svenskaskolaniseattle' ),
+			'name'          => __( 'Footer', 'svenskaskolaniseattle' ),
 			'id'            => 'sidebar-2',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'svenskaskolaniseattle' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => __( 'Footer 2', 'svenskaskolaniseattle' ),
-			'id'            => 'sidebar-3',
 			'description'   => __( 'Add widgets here to appear in your footer.', 'svenskaskolaniseattle' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
