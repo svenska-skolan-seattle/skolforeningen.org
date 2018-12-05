@@ -123,7 +123,7 @@ function svenskaskolaniseattle_content_width() {
 	}
 
 	// Check if is single post and there is no sidebar.
-	if ( is_single() && ! is_active_sidebar( 'sidebar-1' ) ) {
+	if ( is_single() && ! is_active_sidebar( 'sidebar' ) ) {
 		$content_width = 740;
 	}
 
@@ -147,7 +147,7 @@ function svenskaskolaniseattle_widgets_init() {
 	register_sidebar(
 		array(
 			'name'          => __( 'Sidebar', 'svenskaskolaniseattle' ),
-			'id'            => 'sidebar-1',
+			'id'            => 'sidebar',
 			'description'   => __( 'Add widgets here to appear in your sidebar.', 'svenskaskolaniseattle' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
@@ -158,13 +158,9 @@ function svenskaskolaniseattle_widgets_init() {
 
 	register_sidebar(
 		array(
-			'name'          => __( 'Footer', 'svenskaskolaniseattle' ),
-			'id'            => 'sidebar-2',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'svenskaskolaniseattle' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'name'          => __( 'Site Info', 'svenskaskolaniseattle' ),
+			'id'            => 'site-info',
+			'description'   => __( 'Add widgets here to appear in your footer.', 'svenskaskolaniseattle' )
 		)
 	);
 }
@@ -295,7 +291,7 @@ function svenskaskolaniseattle_content_image_sizes_attr( $sizes, $size ) {
 		$sizes = '(max-width: 706px) 89vw, (max-width: 767px) 82vw, 740px';
 	}
 
-	if ( is_active_sidebar( 'sidebar-1' ) || is_archive() || is_search() || is_home() || is_page() ) {
+	if ( is_active_sidebar( 'sidebar' ) || is_archive() || is_search() || is_home() || is_page() ) {
 		if ( ! ( is_page() && 'one-column' === get_theme_mod( 'page_options' ) ) && 767 <= $width ) {
 			$sizes = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
 		}
