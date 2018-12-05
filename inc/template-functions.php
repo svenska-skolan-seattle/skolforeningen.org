@@ -97,6 +97,6 @@ function svenskaskolaniseattle_panel_count() {
 /**
  * Checks to see if we're on the front page or not.
  */
-function svenskaskolaniseattlen_is_frontpage() {
+function svenskaskolaniseattle_is_frontpage() {
 	return ( is_front_page() && ! is_home() );
 }
